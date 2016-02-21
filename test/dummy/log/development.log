@@ -1,0 +1,3130 @@
+  [1m[36m (5.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.5ms)[0m  select sqlite_version(*)
+  [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateImpQfCustomers (20151201105514)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "imp_qf_customers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "shid" varchar, "hylx" varchar, "dm" varchar, "lxr" varchar, "sj" varchar, "rwsj" date, "sf" varchar, "cs" varchar, "dz" text, "ywy" varchar, "fl" varchar, "zdcm" varchar, "jjkdbxe" decimal(12,2), "jjkdyxe" decimal(12,2), "xykdbxe" decimal(12,2), "xykdyxe" decimal(12,2), "imp_log_id" integer, "zt" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151201105514"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateImpQfTrades (20151201105520)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "imp_qf_trades" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "shid" varchar, "zzh" varchar, "jyrq" varchar, "jylx" varchar, "jyjg" varchar, "jye" varchar, "zdcm" varchar, "imp_log_id" integer, "zt" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151201105520"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+Migrating to CreateImpQfClearings (20151201105525)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "imp_qf_clearings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "shid" varchar, "qsrq" varchar, "jybs" varchar, "jybj" varchar, "sxf" varchar, "jsje" varchar, "sjqsje" varchar, "qszt" varchar, "imp_log_id" integer, "zt" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151201105525"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateUsers (20151201105819)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "mobile" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151201105819"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to AddDeviseToUsers (20151201105912)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.9ms)[0m  ALTER TABLE "users" ADD "email" varchar DEFAULT ''
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "reset_password_token" varchar
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "reset_password_sent_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "remember_created_at" datetime
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "current_sign_in_at" datetime
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "last_sign_in_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "current_sign_in_ip" varchar
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "last_sign_in_ip" varchar[0m
+  [1m[35m (0.4ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151201105912"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to CreateCms (20151201110008)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "comfy_cms_sites" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "label" varchar NOT NULL, "identifier" varchar NOT NULL, "hostname" varchar NOT NULL, "path" varchar, "locale" varchar DEFAULT 'en' NOT NULL, "is_mirrored" boolean DEFAULT 'f' NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "index_comfy_cms_sites_on_hostname" ON "comfy_cms_sites" ("hostname")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_comfy_cms_sites_on_is_mirrored" ON "comfy_cms_sites" ("is_mirrored")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:36)
+  [1m[35m (0.2ms)[0m  CREATE TABLE "comfy_cms_layouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "parent_id" integer, "app_layout" varchar, "label" varchar NOT NULL, "identifier" varchar NOT NULL, "content" text(16777215), "css" text(16777215), "js" text(16777215), "position" integer DEFAULT 0 NOT NULL, "is_shared" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_layouts_on_parent_id_and_position" ON "comfy_cms_layouts" ("parent_id", "position")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.4ms)[0m  [1mCREATE UNIQUE INDEX "index_comfy_cms_layouts_on_site_id_and_identifier" ON "comfy_cms_layouts" ("site_id", "identifier")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:55)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "comfy_cms_pages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "layout_id" integer, "parent_id" integer, "target_page_id" integer, "label" varchar NOT NULL, "slug" varchar, "full_path" varchar NOT NULL, "content_cache" text(16777215), "position" integer DEFAULT 0 NOT NULL, "children_count" integer DEFAULT 0 NOT NULL, "is_published" boolean DEFAULT 't' NOT NULL, "is_shared" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "index_comfy_cms_pages_on_site_id_and_full_path" ON "comfy_cms_pages" ("site_id", "full_path")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "index_comfy_cms_pages_on_parent_id_and_position" ON "comfy_cms_pages" ("parent_id", "position")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:65)
+  [1m[35m (0.4ms)[0m  CREATE TABLE "comfy_cms_blocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "identifier" varchar NOT NULL, "content" text(16777215), "blockable_id" integer, "blockable_type" varchar, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "index_comfy_cms_blocks_on_identifier" ON "comfy_cms_blocks" ("identifier")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "index_comfy_cms_blocks_on_blockable_id_and_blockable_type" ON "comfy_cms_blocks" ("blockable_id", "blockable_type")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:78)
+  [1m[35m (0.2ms)[0m  CREATE TABLE "comfy_cms_snippets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "label" varchar NOT NULL, "identifier" varchar NOT NULL, "content" text(16777215), "position" integer DEFAULT 0 NOT NULL, "is_shared" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_comfy_cms_snippets_on_site_id_and_identifier" ON "comfy_cms_snippets" ("site_id", "identifier")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_snippets_on_site_id_and_position" ON "comfy_cms_snippets" ("site_id", "position")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:93)
+  [1m[35m (0.2ms)[0m  CREATE TABLE "comfy_cms_files" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "block_id" integer, "label" varchar NOT NULL, "file_file_name" varchar NOT NULL, "file_content_type" varchar NOT NULL, "file_file_size" integer NOT NULL, "description" varchar(2048), "position" integer DEFAULT 0 NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_files_on_site_id_and_label" ON "comfy_cms_files" ("site_id", "label")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_files_on_site_id_and_file_file_name" ON "comfy_cms_files" ("site_id", "file_file_name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_comfy_cms_files_on_site_id_and_position" ON "comfy_cms_files" ("site_id", "position")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_comfy_cms_files_on_site_id_and_block_id" ON "comfy_cms_files" ("site_id", "block_id")
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "comfy_cms_revisions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "record_type" varchar NOT NULL, "record_id" integer NOT NULL, "data" text(16777215), "created_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_cms_revisions_on_rtype_and_rid_and_created_at" ON "comfy_cms_revisions" ("record_type", "record_id", "created_at")
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "comfy_cms_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "label" varchar NOT NULL, "categorized_type" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE UNIQUE INDEX "index_cms_categories_on_site_id_and_cat_type_and_label" ON "comfy_cms_categories" ("site_id", "categorized_type", "label")
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "comfy_cms_categorizations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "category_id" integer NOT NULL, "categorized_type" varchar NOT NULL, "categorized_id" integer NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE UNIQUE INDEX "index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id" ON "comfy_cms_categorizations" ("category_id", "categorized_type", "categorized_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151201110008"]]
+  [1m[35m (1.6ms)[0m  commit transaction
+Migrating to CreateImpLogs (20151204033533)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "imp_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "uid" integer, "title" varchar, "received_at" varchar, "mail_from" varchar, "detail" varchar DEFAULT '', "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151204033533"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateClients (20151221032507)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "salesman_id" integer, "shid" integer, "shop_name" varchar, "shop_tel" varchar, "category_id" integer, "rate" decimal(12,6), "join_date" varchar, "bank_card_limit_each" decimal(12,2), "bank_card_limit_month" decimal(12,2), "credit_card_limit_each" decimal(12,2), "credit_card_limit_month" decimal(12,2), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151221032507"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateContacts (20151221032532)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "contacts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "tel" varchar, "qq" varchar, "wechart" varchar, "cid" varchar, "cid_verified_date" datetime, "roles" varchar DEFAULT '', "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_contacts_on_name" ON "contacts" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_name' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_contacts_on_tel" ON "contacts" ("tel")[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "clients_contacts" ("client_id" integer, "contact_id" integer) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_clients_contacts_on_client_id" ON "clients_contacts" ("client_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "index_clients_contacts_on_contact_id" ON "clients_contacts" ("contact_id")[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "salesmen_contacts" ("salesman_id" integer, "contact_id" integer) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_salesmen_contacts_on_salesman_id" ON "salesmen_contacts" ("salesman_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "index_salesmen_contacts_on_contact_id" ON "salesmen_contacts" ("contact_id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032532"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAddresses (20151221032545)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "addresses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "addr_obj_id" integer, "addr_obj_type" varchar, "province_id" integer, "city_id" integer, "street" varchar, "post_code" varchar, "status" integer DEFAULT 1, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032545"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePosMachines (20151221032606)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "pos_machines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "serial_number" varchar, "client_id" integer, "brand" varchar, "model" varchar, "info" varchar, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032606"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateSalesmen (20151221032616)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "salesmen" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" integer, "contact_id" integer, "name" varchar, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032616"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCodeTables (20151221032632)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "code_tables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "val" varchar, "parent_id" integer, "status" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032632"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTrades (20151225051530)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/jimmy/work/ppay_model/db/migrate/20151225051530_create_trades.rb:13)
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "trades" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "client_id" integer, "pos_machine_id" integer, "sub_account" varchar DEFAULT '', "trade_date" datetime, "trade_type_id" integer, "trade_result_id" integer, "trade_amount" decimal(12,2), "status" integer DEFAULT 0, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151225051530"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateClearings (20151225051540)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/jimmy/work/ppay_model/db/migrate/20151225051540_create_clearings.rb:14)
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "clearings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "client_id" integer, "trade_date" varchar, "trade_count" integer, "trade_amount" decimal(12,2), "trade_fee" decimal(12,2), "clearing_amount" decimal(12,2), "actual_amount" decimal(12,2), "clearing_status_id" integer, "status" integer DEFAULT 0, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151225051540"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAgents (20151225052108)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "agents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "parent_id" integer, "company_id" integer, "cooperation_type_id" integer, "cooperation_date" datetime, "t0_enabled" integer, "bank_biz_types" varchar, "cooperation_location" text, "deposit" decimal(12,2), "amounts_payable" decimal(12,2), "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151225052108"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to ActsAsTaggableOnMigration (20151230022024)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar) [0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "taggings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tag_id" integer, "taggable_id" integer, "taggable_type" varchar, "tagger_id" integer, "tagger_type" varchar, "context" varchar(128), "created_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_taggings_on_tag_id" ON "taggings" ("tag_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_taggings_on_taggable_id_and_taggable_type_and_context" ON "taggings" ("taggable_id", "taggable_type", "context")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151230022024"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddMissingUniqueIndices (20151230022025)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE UNIQUE INDEX "index_tags_on_name" ON "tags" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+[0m
+  [1m[35m (0.3ms)[0m  DROP INDEX "index_taggings_on_tag_id"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  DROP INDEX "index_taggings_on_taggable_id_and_taggable_type_and_context"
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "taggings_idx" ON "taggings" ("tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151230022025"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+Migrating to AddTaggingsCounterCacheToTags (20151230022026)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "tags" ADD "taggings_count" integer DEFAULT 0[0m
+  [1m[35m (1.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddTaggingsCounterCacheToTags (20151230022026)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "tags" ADD "taggings_count" integer DEFAULT 0[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.5ms)[0m  SELECT  "tags".* FROM "tags"  ORDER BY "tags"."id" ASC LIMIT 1000
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151230022026"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to AddMissingTaggableIndex (20151230022027)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='taggings_idx' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='taggings_idx' AND type='index'
+[0m
+  [1m[35m (0.7ms)[0m  CREATE  INDEX "index_taggings_on_taggable_id_and_taggable_type_and_context" ON "taggings" ("taggable_id", "taggable_type", "context")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151230022027"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to ChangeCollationForTagNames (20151230022028)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151230022028"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateBankCards (20160104084530)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "bank_cards" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "bankcard_obj_id" integer, "bankcard_obj_type" varchar, "bank_name" varchar, "bank_sub_branch" varchar, "account_name" varchar, "account_number" varchar, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160104084530"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCompanies (20160104085011)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "companies" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "address_id" integer, "name" text, "short_name" varchar, "establish_date" date, "location" varchar, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160104085011"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddContactToAgents (20160104094816)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "agents_contacts" ("agent_id" integer, "contact_id" integer) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_agents_contacts_on_agent_id" ON "agents_contacts" ("agent_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+[0m
+  [1m[35m (0.4ms)[0m  CREATE  INDEX "index_agents_contacts_on_contact_id" ON "agents_contacts" ("contact_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160104094816"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to CreateClientDayTradetotals (20160107052038)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "client_day_tradetotals" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "client_id" integer, "trade_date" date, "total_amount" decimal(12,2) DEFAULT 0, "total_count" integer DEFAULT 0, "wechat_amount" decimal(12,2) DEFAULT 0, "wechat_count" integer DEFAULT 0, "alipay_amount" decimal(12,2) DEFAULT 0, "alipay_count" integer DEFAULT 0, "t0_amount" decimal(12,2) DEFAULT 0, "t0_count" integer DEFAULT 0, "t1_amount" decimal(12,2) DEFAULT 0, "t1_count" integer DEFAULT 0, "expected_amount" decimal(12,2) DEFAULT 0, "actual_amount" decimal(12,2) DEFAULT 0, "diff_amount" decimal(12,2) DEFAULT 0, "diff_total_amount" decimal(12,2) DEFAULT 0, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160107052038"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateSalesmanDayTradetotals (20160107052051)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "salesman_day_tradetotals" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "salesman_id" integer, "trade_date" date, "total_amount" decimal(12,2) DEFAULT 0, "total_count" integer DEFAULT 0, "wechat_amount" decimal(12,2) DEFAULT 0, "wechat_count" integer DEFAULT 0, "alipay_amount" decimal(12,2) DEFAULT 0, "alipay_count" integer DEFAULT 0, "t0_amount" decimal(12,2) DEFAULT 0, "t0_count" integer DEFAULT 0, "t1_amount" decimal(12,2) DEFAULT 0, "t1_count" integer DEFAULT 0, "expected_amount" decimal(12,2) DEFAULT 0, "actual_amount" decimal(12,2) DEFAULT 0, "diff_amount" decimal(12,2) DEFAULT 0, "diff_total_amount" decimal(12,2) DEFAULT 0, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160107052051"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to AddAgentToUser (20160113075415)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "users" ADD "agent_id" integer
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160113075415"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateNotices (20160122025536)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "notices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "publish_date" datetime, "close_date" datetime, "title" varchar, "content" text, "publisher_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160122025536"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to AddShztToImportQfClients (20160124094454)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "imp_qf_customers" ADD "shzt" varchar
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160124094454"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to AddClientToSalesman (20160124110121)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "salesmen" ADD "client_id" integer
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160124110121"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to AddAddressToClient (20160124134341)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "clients" ADD "address_id" integer
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160124134341"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to AddMainContactToClients (20160131133448)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "clients" ADD "main_contact_id" integer
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160131133448"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to AddLxrToClients (20160205105224)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "clients" ADD "contact_name" varchar
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160205105224"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateLogs (20160206032711)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/jimmy/work/ppay_model/db/migrate/20160206032711_create_logs.rb:17)
+  [1m[35m (0.6ms)[0m  CREATE TABLE "logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "ref_data_type" varchar, "ref_data_id" integer, "page_url" varchar, "host" varchar, "remote_host" varchar, "remote_addr" varchar, "controller" varchar, "action" varchar, "log_title" varchar, "log_detail" text, "parent_id" integer, "level" integer DEFAULT 0, "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160206032711"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to ProfitLadders (20160212052251)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "contracts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "contract_type" varchar, "contract_title" varchar, "profit_mode" varchar, "trade_sum_id" integer, "valid_date_from" date, "valid_date_to" date, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "profit_ladders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "contract_id" integer, "amount_start" decimal(12,2) DEFAULT 0, "amount_percent" decimal(12,6) DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "agents_contracts" ("agent_id" integer, "contract_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_agents_contracts_on_agent_id" ON "agents_contracts" ("agent_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_agents_contracts_on_contract_id" ON "agents_contracts" ("contract_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160212052251"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+Migrating to TradeSums (20160219075240)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "trade_sums" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "sum_obj_id" integer, "sum_obj_type" varchar, "trade_date" varchar, "sum_type" varchar, "trade_type" varchar, "amount" decimal(12,2) DEFAULT 0, "count" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.3ms)[0m  CREATE  INDEX "index_trade_sums_on_sum_obj_type_and_sum_obj_id" ON "trade_sums" ("sum_obj_type", "sum_obj_id")
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+[0m
+  [1m[35m (0.3ms)[0m  CREATE  INDEX "index_trade_sums_on_trade_date" ON "trade_sums" ("trade_date")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_trade_sums_on_sum_type" ON "trade_sums" ("sum_type")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_trade_sums_on_trade_type" ON "trade_sums" ("trade_type")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160219075240"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddTagToCodeTable (20160220115227)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "code_tables" ADD "tag" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160220115227"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+
+  [1m[36m (1.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='taggings_idx' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='taggings_idx' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tags_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tags_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='taggings_idx' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='taggings_idx' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tags_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tags_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to AddTagToCodeTable (20160220115227)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TEMPORARY TABLE "acode_tables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "val" varchar, "parent_id" integer, "status" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "tag" varchar) 
+  [1m[36m (0.5ms)[0m  [1mSELECT * FROM "code_tables"[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "code_tables"
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "code_tables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "val" varchar, "parent_id" integer, "status" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "acode_tables"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "acode_tables"[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = ?  [["version", "20160220115227"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.3ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='taggings_idx' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='taggings_idx' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tags_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tags_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddTagToCodeTable (20160220115227)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "code_tables" ADD "tag" varchar[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160220115227"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+[0m
+  [1m[35m (2.7ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_name' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='taggings_idx' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='taggings_idx' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tags_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tags_on_name' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='taggings_idx' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='taggings_idx' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tags_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tags_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='taggings_idx' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='taggings_idx' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tags_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tags_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateImpQfCustomers (20151201105514)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "imp_qf_customers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "shid" varchar, "hylx" varchar, "dm" varchar, "lxr" varchar, "sj" varchar, "rwsj" date, "sf" varchar, "cs" varchar, "dz" text, "ywy" varchar, "fl" varchar, "zdcm" varchar, "jjkdbxe" decimal(12,2), "jjkdyxe" decimal(12,2), "xykdbxe" decimal(12,2), "xykdyxe" decimal(12,2), "imp_log_id" integer, "zt" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151201105514"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateImpQfTrades (20151201105520)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "imp_qf_trades" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "shid" varchar, "zzh" varchar, "jyrq" varchar, "jylx" varchar, "jyjg" varchar, "jye" varchar, "zdcm" varchar, "imp_log_id" integer, "zt" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151201105520"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateImpQfClearings (20151201105525)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "imp_qf_clearings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "shid" varchar, "qsrq" varchar, "jybs" varchar, "jybj" varchar, "sxf" varchar, "jsje" varchar, "sjqsje" varchar, "qszt" varchar, "imp_log_id" integer, "zt" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151201105525"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateUsers (20151201105819)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "mobile" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151201105819"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddDeviseToUsers (20151201105912)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "email" varchar DEFAULT ''[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" varchar[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" datetime
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" datetime[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" datetime
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" varchar[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" varchar
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.1ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151201105912"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+Migrating to CreateCms (20151201110008)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "comfy_cms_sites" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "label" varchar NOT NULL, "identifier" varchar NOT NULL, "hostname" varchar NOT NULL, "path" varchar, "locale" varchar DEFAULT 'en' NOT NULL, "is_mirrored" boolean DEFAULT 'f' NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_comfy_cms_sites_on_hostname" ON "comfy_cms_sites" ("hostname")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_sites_on_is_mirrored" ON "comfy_cms_sites" ("is_mirrored")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:36)
+  [1m[35m (0.2ms)[0m  CREATE TABLE "comfy_cms_layouts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "parent_id" integer, "app_layout" varchar, "label" varchar NOT NULL, "identifier" varchar NOT NULL, "content" text(16777215), "css" text(16777215), "js" text(16777215), "position" integer DEFAULT 0 NOT NULL, "is_shared" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_layouts_on_parent_id_and_position" ON "comfy_cms_layouts" ("parent_id", "position")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.4ms)[0m  [1mCREATE UNIQUE INDEX "index_comfy_cms_layouts_on_site_id_and_identifier" ON "comfy_cms_layouts" ("site_id", "identifier")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:55)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "comfy_cms_pages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "layout_id" integer, "parent_id" integer, "target_page_id" integer, "label" varchar NOT NULL, "slug" varchar, "full_path" varchar NOT NULL, "content_cache" text(16777215), "position" integer DEFAULT 0 NOT NULL, "children_count" integer DEFAULT 0 NOT NULL, "is_published" boolean DEFAULT 't' NOT NULL, "is_shared" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_comfy_cms_pages_on_site_id_and_full_path" ON "comfy_cms_pages" ("site_id", "full_path")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_pages_on_parent_id_and_position" ON "comfy_cms_pages" ("parent_id", "position")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:65)
+  [1m[35m (0.2ms)[0m  CREATE TABLE "comfy_cms_blocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "identifier" varchar NOT NULL, "content" text(16777215), "blockable_id" integer, "blockable_type" varchar, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_blocks_on_identifier" ON "comfy_cms_blocks" ("identifier")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_blocks_on_blockable_id_and_blockable_type" ON "comfy_cms_blocks" ("blockable_id", "blockable_type")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:78)
+  [1m[35m (0.2ms)[0m  CREATE TABLE "comfy_cms_snippets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "label" varchar NOT NULL, "identifier" varchar NOT NULL, "content" text(16777215), "position" integer DEFAULT 0 NOT NULL, "is_shared" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_comfy_cms_snippets_on_site_id_and_identifier" ON "comfy_cms_snippets" ("site_id", "identifier")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_snippets_on_site_id_and_position" ON "comfy_cms_snippets" ("site_id", "position")[0m
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in up at /Users/jimmy/work/ppay_model/db/migrate/20151201110008_create_cms.rb:93)
+  [1m[35m (0.2ms)[0m  CREATE TABLE "comfy_cms_files" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "block_id" integer, "label" varchar NOT NULL, "file_file_name" varchar NOT NULL, "file_content_type" varchar NOT NULL, "file_file_size" integer NOT NULL, "description" varchar(2048), "position" integer DEFAULT 0 NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_files_on_site_id_and_label" ON "comfy_cms_files" ("site_id", "label")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_comfy_cms_files_on_site_id_and_file_file_name" ON "comfy_cms_files" ("site_id", "file_file_name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_comfy_cms_files_on_site_id_and_position" ON "comfy_cms_files" ("site_id", "position")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_comfy_cms_files_on_site_id_and_block_id" ON "comfy_cms_files" ("site_id", "block_id")
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "comfy_cms_revisions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "record_type" varchar NOT NULL, "record_id" integer NOT NULL, "data" text(16777215), "created_at" datetime) [0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_cms_revisions_on_rtype_and_rid_and_created_at" ON "comfy_cms_revisions" ("record_type", "record_id", "created_at")
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "comfy_cms_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer NOT NULL, "label" varchar NOT NULL, "categorized_type" varchar NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "index_cms_categories_on_site_id_and_cat_type_and_label" ON "comfy_cms_categories" ("site_id", "categorized_type", "label")
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "comfy_cms_categorizations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "category_id" integer NOT NULL, "categorized_type" varchar NOT NULL, "categorized_id" integer NOT NULL) [0m
+  [1m[35m (0.3ms)[0m  CREATE UNIQUE INDEX "index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id" ON "comfy_cms_categorizations" ("category_id", "categorized_type", "categorized_id")
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151201110008"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+Migrating to CreateImpLogs (20151204033533)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "imp_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "uid" integer, "title" varchar, "received_at" varchar, "mail_from" varchar, "detail" varchar DEFAULT '', "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151204033533"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateClients (20151221032507)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "clients" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "salesman_id" integer, "shid" integer, "shop_name" varchar, "shop_tel" varchar, "category_id" integer, "rate" decimal(12,6), "join_date" varchar, "bank_card_limit_each" decimal(12,2), "bank_card_limit_month" decimal(12,2), "credit_card_limit_each" decimal(12,2), "credit_card_limit_month" decimal(12,2), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151221032507"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateContacts (20151221032532)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "contacts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "tel" varchar, "qq" varchar, "wechart" varchar, "cid" varchar, "cid_verified_date" datetime, "roles" varchar DEFAULT '', "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_contacts_on_name" ON "contacts" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_name' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_contacts_on_tel" ON "contacts" ("tel")[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "clients_contacts" ("client_id" integer, "contact_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_clients_contacts_on_client_id" ON "clients_contacts" ("client_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_clients_contacts_on_contact_id" ON "clients_contacts" ("contact_id")[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "salesmen_contacts" ("salesman_id" integer, "contact_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_salesmen_contacts_on_salesman_id" ON "salesmen_contacts" ("salesman_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_salesmen_contacts_on_contact_id" ON "salesmen_contacts" ("contact_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032532"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAddresses (20151221032545)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "addresses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "addr_obj_id" integer, "addr_obj_type" varchar, "province_id" integer, "city_id" integer, "street" varchar, "post_code" varchar, "status" integer DEFAULT 1, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032545"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreatePosMachines (20151221032606)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "pos_machines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "serial_number" varchar, "client_id" integer, "brand" varchar, "model" varchar, "info" varchar, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032606"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateSalesmen (20151221032616)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "salesmen" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "agent_id" integer, "contact_id" integer, "name" varchar, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032616"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCodeTables (20151221032632)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "code_tables" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "val" varchar, "parent_id" integer, "status" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151221032632"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTrades (20151225051530)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/jimmy/work/ppay_model/db/migrate/20151225051530_create_trades.rb:13)
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "trades" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "client_id" integer, "pos_machine_id" integer, "sub_account" varchar DEFAULT '', "trade_date" datetime, "trade_type_id" integer, "trade_result_id" integer, "trade_amount" decimal(12,2), "status" integer DEFAULT 0, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151225051530"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateClearings (20151225051540)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/jimmy/work/ppay_model/db/migrate/20151225051540_create_clearings.rb:14)
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "clearings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "client_id" integer, "trade_date" varchar, "trade_count" integer, "trade_amount" decimal(12,2), "trade_fee" decimal(12,2), "clearing_amount" decimal(12,2), "actual_amount" decimal(12,2), "clearing_status_id" integer, "status" integer DEFAULT 0, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151225051540"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAgents (20151225052108)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "agents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "parent_id" integer, "company_id" integer, "cooperation_type_id" integer, "cooperation_date" datetime, "t0_enabled" integer, "bank_biz_types" varchar, "cooperation_location" text, "deposit" decimal(12,2), "amounts_payable" decimal(12,2), "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151225052108"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to ActsAsTaggableOnMigration (20151230022024)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar) [0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "taggings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tag_id" integer, "taggable_id" integer, "taggable_type" varchar, "tagger_id" integer, "tagger_type" varchar, "context" varchar(128), "created_at" datetime) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_taggings_on_tag_id" ON "taggings" ("tag_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_taggings_on_taggable_id_and_taggable_type_and_context" ON "taggings" ("taggable_id", "taggable_type", "context")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151230022024"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddMissingUniqueIndices (20151230022025)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE UNIQUE INDEX "index_tags_on_name" ON "tags" ("name")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+[0m
+  [1m[35m (0.4ms)[0m  DROP INDEX "index_taggings_on_tag_id"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m  DROP INDEX "index_taggings_on_taggable_id_and_taggable_type_and_context"
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "taggings_idx" ON "taggings" ("tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151230022025"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+Migrating to AddTaggingsCounterCacheToTags (20151230022026)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "tags" ADD "taggings_count" integer DEFAULT 0[0m
+  [1m[35mActsAsTaggableOn::Tag Load (0.1ms)[0m  SELECT  "tags".* FROM "tags"  ORDER BY "tags"."id" ASC LIMIT 1000
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151230022026"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to AddMissingTaggableIndex (20151230022027)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='taggings_idx' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='taggings_idx' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1mCREATE  INDEX "index_taggings_on_taggable_id_and_taggable_type_and_context" ON "taggings" ("taggable_id", "taggable_type", "context")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151230022027"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to ChangeCollationForTagNames (20151230022028)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151230022028"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+Migrating to CreateBankCards (20160104084530)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "bank_cards" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "bankcard_obj_id" integer, "bankcard_obj_type" varchar, "bank_name" varchar, "bank_sub_branch" varchar, "account_name" varchar, "account_number" varchar, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160104084530"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateCompanies (20160104085011)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "companies" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "address_id" integer, "name" text, "short_name" varchar, "establish_date" date, "location" varchar, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160104085011"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to AddContactToAgents (20160104094816)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "agents_contacts" ("agent_id" integer, "contact_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_agents_contacts_on_agent_id" ON "agents_contacts" ("agent_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_agents_contacts_on_contact_id" ON "agents_contacts" ("contact_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160104094816"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateClientDayTradetotals (20160107052038)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "client_day_tradetotals" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "client_id" integer, "trade_date" date, "total_amount" decimal(12,2) DEFAULT 0, "total_count" integer DEFAULT 0, "wechat_amount" decimal(12,2) DEFAULT 0, "wechat_count" integer DEFAULT 0, "alipay_amount" decimal(12,2) DEFAULT 0, "alipay_count" integer DEFAULT 0, "t0_amount" decimal(12,2) DEFAULT 0, "t0_count" integer DEFAULT 0, "t1_amount" decimal(12,2) DEFAULT 0, "t1_count" integer DEFAULT 0, "expected_amount" decimal(12,2) DEFAULT 0, "actual_amount" decimal(12,2) DEFAULT 0, "diff_amount" decimal(12,2) DEFAULT 0, "diff_total_amount" decimal(12,2) DEFAULT 0, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160107052038"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateSalesmanDayTradetotals (20160107052051)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "salesman_day_tradetotals" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "salesman_id" integer, "trade_date" date, "total_amount" decimal(12,2) DEFAULT 0, "total_count" integer DEFAULT 0, "wechat_amount" decimal(12,2) DEFAULT 0, "wechat_count" integer DEFAULT 0, "alipay_amount" decimal(12,2) DEFAULT 0, "alipay_count" integer DEFAULT 0, "t0_amount" decimal(12,2) DEFAULT 0, "t0_count" integer DEFAULT 0, "t1_amount" decimal(12,2) DEFAULT 0, "t1_count" integer DEFAULT 0, "expected_amount" decimal(12,2) DEFAULT 0, "actual_amount" decimal(12,2) DEFAULT 0, "diff_amount" decimal(12,2) DEFAULT 0, "diff_total_amount" decimal(12,2) DEFAULT 0, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160107052051"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddAgentToUser (20160113075415)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD "agent_id" integer[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160113075415"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+Migrating to CreateNotices (20160122025536)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "notices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "publish_date" datetime, "close_date" datetime, "title" varchar, "content" text, "publisher_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160122025536"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddShztToImportQfClients (20160124094454)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "imp_qf_customers" ADD "shzt" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160124094454"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddClientToSalesman (20160124110121)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "salesmen" ADD "client_id" integer[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160124110121"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddAddressToClient (20160124134341)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "clients" ADD "address_id" integer[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160124134341"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddMainContactToClients (20160131133448)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "clients" ADD "main_contact_id" integer[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160131133448"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddLxrToClients (20160205105224)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "clients" ADD "contact_name" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160205105224"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLogs (20160206032711)
+  [1m[35m (0.1ms)[0m  begin transaction
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/jimmy/work/ppay_model/db/migrate/20160206032711_create_logs.rb:17)
+  [1m[36m (1.4ms)[0m  [1mCREATE TABLE "logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "ref_data_type" varchar, "ref_data_id" integer, "page_url" varchar, "host" varchar, "remote_host" varchar, "remote_addr" varchar, "controller" varchar, "action" varchar, "log_title" varchar, "log_detail" text, "parent_id" integer, "level" integer DEFAULT 0, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160206032711"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to ProfitLadders (20160212052251)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "contracts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "contract_type" varchar, "contract_title" varchar, "profit_mode" varchar, "trade_sum_id" integer, "valid_date_from" date, "valid_date_to" date, "status" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "profit_ladders" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "contract_id" integer, "amount_start" decimal(12,2) DEFAULT 0, "amount_percent" decimal(12,6) DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "agents_contracts" ("agent_id" integer, "contract_id" integer) [0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_agents_contracts_on_agent_id" ON "agents_contracts" ("agent_id")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+[0m
+  [1m[35m (0.5ms)[0m  CREATE  INDEX "index_agents_contracts_on_contract_id" ON "agents_contracts" ("contract_id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160212052251"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to TradeSums (20160219075240)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "trade_sums" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "sum_obj_id" integer, "sum_obj_type" varchar, "trade_date" varchar, "sum_type" varchar, "trade_type" varchar, "amount" decimal(12,2) DEFAULT 0, "count" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_trade_sums_on_sum_obj_type_and_sum_obj_id" ON "trade_sums" ("sum_obj_type", "sum_obj_id")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_trade_sums_on_trade_date" ON "trade_sums" ("trade_date")[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_trade_sums_on_sum_type" ON "trade_sums" ("sum_type")
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_trade_sums_on_trade_type" ON "trade_sums" ("trade_type")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160219075240"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+Migrating to AddTagToCodeTable (20160220115227)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "code_tables" ADD "tag" varchar
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160220115227"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_contact_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contacts_on_agent_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_contract_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_agents_contracts_on_agent_id' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_contact_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_clients_contacts_on_client_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_blockable_id_and_blockable_type' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_blocks_on_identifier' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categories_on_site_id_and_cat_type_and_label' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_block_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_file_file_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_files_on_site_id_and_label' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_site_id_and_identifier' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_layouts_on_parent_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_parent_id_and_position' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_pages_on_site_id_and_full_path' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cms_revisions_on_rtype_and_rid_and_created_at' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_is_mirrored' AND type='index'
+[0m
+  [1m[35m (0.4ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_sites_on_hostname' AND type='index'
+
+  [1m[36m (0.3ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_position' AND type='index'
+[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comfy_cms_snippets_on_site_id_and_identifier' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_tel' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_contacts_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_contacts_on_name' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_contact_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_salesmen_contacts_on_salesman_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_taggable_id_and_taggable_type_and_context' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='taggings_idx' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='taggings_idx' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tags_on_name' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tags_on_name' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_type' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_type' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_trade_date' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_trade_sums_on_sum_obj_type_and_sum_obj_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM "users"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'ivy@pooul.cn' LIMIT 1
+  [1m[36mSQL (0.9ms)[0m  [1mINSERT INTO "users" ("name", "mobile", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "ivy"], ["mobile", "13826554535"], ["email", "ivy@pooul.cn"], ["encrypted_password", "$2a$10$bHEAO9enFmgeZB8951P0Jee9MT3FezTAOzeLd73Fvo8NoinSP838m"], ["created_at", "2016-02-21 16:17:49.567774"], ["updated_at", "2016-02-21 16:17:49.567774"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'jimmy@pooul.cn' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("name", "mobile", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "jimmy"], ["mobile", "18682320151"], ["email", "jimmy@pooul.cn"], ["encrypted_password", "$2a$10$ELdHNu6gMQbOYkNcV1Cfp.jBFQtXOFp1TCfumu1t2luSO7Jr7vAva"], ["created_at", "2016-02-21 16:17:49.651124"], ["updated_at", "2016-02-21 16:17:49.651124"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'alei@pooul.cn' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "mobile", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "alei"], ["mobile", "15817329272"], ["email", "alei@pooul.cn"], ["encrypted_password", "$2a$10$drqO3DGvTwauVjlnzRqXe.5AkGiuLUFLcB1bqRVk/PHrkT6jsxvhm"], ["created_at", "2016-02-21 16:17:49.738755"], ["updated_at", "2016-02-21 16:17:49.738755"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.4ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'zk@pooul.cn' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "mobile", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "zk"], ["mobile", "18665319889"], ["email", "zk@pooul.cn"], ["encrypted_password", "$2a$10$VBlY2ZYn6OpkQAIdXi4IiOhuph7kdSzsMVVUMCCFXaFOWUuIDdPG."], ["created_at", "2016-02-21 16:17:49.819409"], ["updated_at", "2016-02-21 16:17:49.819409"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'angel@pooul.cn' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "mobile", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "angel"], ["mobile", "18670358555"], ["email", "angel@pooul.cn"], ["encrypted_password", "$2a$10$NCvWdBo5mdff8KbH3sq7oe7JDpcSwBcjHDuT4j0Hi3lVnheQeepJq"], ["created_at", "2016-02-21 16:17:49.901373"], ["updated_at", "2016-02-21 16:17:49.901373"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'qpos@pooul.cn' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "mobile", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "qpos"], ["mobile", "18699992568"], ["email", "qpos@pooul.cn"], ["encrypted_password", "$2a$10$tUxzC56xUNwYPfesd4v6lOhIW3/InNXvM/WKbVmt3gq0139F8eVAq"], ["created_at", "2016-02-21 16:17:49.987356"], ["updated_at", "2016-02-21 16:17:49.987356"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'helapu@pooul.cn' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "mobile", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "helapu"], ["mobile", "18684048270"], ["email", "helapu@pooul.cn"], ["encrypted_password", "$2a$10$WxVm4MV/XLegeoGYS01ZpO9gaxxvCORUE8Yyef88OogDd0QhO6nMG"], ["created_at", "2016-02-21 16:17:50.069538"], ["updated_at", "2016-02-21 16:17:50.069538"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'wxl@pooul.cn' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "users" ("name", "mobile", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "wxl"], ["mobile", "18346827602"], ["email", "wxl@pooul.cn"], ["encrypted_password", "$2a$10$At0NKsQXGKUtneUES.hqRe8SCy7G.O3lLzGtieZ08NvEKNB6nvGO."], ["created_at", "2016-02-21 16:17:50.149682"], ["updated_at", "2016-02-21 16:17:50.149682"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.1ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'ljn@pooul.cn' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("name", "mobile", "email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "ljn"], ["mobile", "15914039837"], ["email", "ljn@pooul.cn"], ["encrypted_password", "$2a$10$dHROUW.ibHKbdfcjClG.Bu7suz7qLuAp8h8JSFLShpfCkm1811pHS"], ["created_at", "2016-02-21 16:17:50.230406"], ["updated_at", "2016-02-21 16:17:50.230406"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36mCodeTable Load (0.7ms)[0m  [1mSELECT  "code_tables".* FROM "code_tables" WHERE "code_tables"."name" = ? LIMIT 1[0m  [["name", "main_menu"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "code_tables" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "main_menu"], ["created_at", "2016-02-21 16:17:50.253487"], ["updated_at", "2016-02-21 16:17:50.253487"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "首页"], ["val", ""], ["tag", "fa-laptop"], ["status", 10], ["parent_id", 1], ["created_at", "2016-02-21 16:17:50.256533"], ["updated_at", "2016-02-21 16:17:50.256533"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "商户数据"], ["val", ""], ["tag", "fa-credit-card"], ["status", 10], ["parent_id", 1], ["created_at", "2016-02-21 16:17:50.259703"], ["updated_at", "2016-02-21 16:17:50.259703"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "商户资料"], ["val", "clients_path"], ["tag", "/clients"], ["status", 11], ["parent_id", 3], ["created_at", "2016-02-21 16:17:50.262482"], ["updated_at", "2016-02-21 16:17:50.262482"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "业务员"], ["val", "salesmen_path"], ["tag", "/salesmen"], ["status", 11], ["parent_id", 3], ["created_at", "2016-02-21 16:17:50.265520"], ["updated_at", "2016-02-21 16:17:50.265520"]]
+  [1m[35m (3.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "联系人"], ["val", "contacts_path"], ["tag", "/contacts"], ["status", 11], ["parent_id", 3], ["created_at", "2016-02-21 16:17:50.271660"], ["updated_at", "2016-02-21 16:17:50.271660"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "交易清算"], ["val", ""], ["tag", "fa-database"], ["status", 10], ["parent_id", 1], ["created_at", "2016-02-21 16:17:50.274919"], ["updated_at", "2016-02-21 16:17:50.274919"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "交易数据"], ["val", "trades_path"], ["tag", "/trades"], ["status", 11], ["parent_id", 7], ["created_at", "2016-02-21 16:17:50.278040"], ["updated_at", "2016-02-21 16:17:50.278040"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "清算数据"], ["val", "clearings_path"], ["tag", "/clearings"], ["status", 11], ["parent_id", 7], ["created_at", "2016-02-21 16:17:50.281589"], ["updated_at", "2016-02-21 16:17:50.281589"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "数据导入"], ["val", ""], ["tag", "fa-area-chart"], ["status", 10], ["parent_id", 1], ["created_at", "2016-02-21 16:17:50.284353"], ["updated_at", "2016-02-21 16:17:50.284353"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "导入日志"], ["val", "imp_logs_path"], ["tag", "/imp_logs"], ["status", 11], ["parent_id", 10], ["created_at", "2016-02-21 16:17:50.287081"], ["updated_at", "2016-02-21 16:17:50.287081"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "商户信息"], ["val", "imp_qf_customers_path"], ["tag", "/imp_qf_customers"], ["status", 11], ["parent_id", 10], ["created_at", "2016-02-21 16:17:50.289684"], ["updated_at", "2016-02-21 16:17:50.289684"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "交易"], ["val", "imp_qf_trades_path"], ["tag", "/imp_qf_trades"], ["status", 11], ["parent_id", 10], ["created_at", "2016-02-21 16:17:50.292071"], ["updated_at", "2016-02-21 16:17:50.292071"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "清算"], ["val", "imp_qf_clearings_path"], ["tag", "/imp_qf_clearings"], ["status", 11], ["parent_id", 10], ["created_at", "2016-02-21 16:17:50.294698"], ["updated_at", "2016-02-21 16:17:50.294698"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "管理工具"], ["val", ""], ["tag", "fa-sitemap"], ["status", 10], ["parent_id", 1], ["created_at", "2016-02-21 16:17:50.297520"], ["updated_at", "2016-02-21 16:17:50.297520"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "用户管理"], ["val", "users_path"], ["tag", "/users"], ["status", 11], ["parent_id", 15], ["created_at", "2016-02-21 16:17:50.302436"], ["updated_at", "2016-02-21 16:17:50.302436"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "代码表管理"], ["val", "code_tables_path"], ["tag", "/code_tables"], ["status", 11], ["parent_id", 15], ["created_at", "2016-02-21 16:17:50.306449"], ["updated_at", "2016-02-21 16:17:50.306449"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "地址管理"], ["val", "addresses_path"], ["tag", "/addresses"], ["status", 11], ["parent_id", 15], ["created_at", "2016-02-21 16:17:50.309259"], ["updated_at", "2016-02-21 16:17:50.309259"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "POS管理"], ["val", "pos_machines_path"], ["tag", "/pos_machines"], ["status", 11], ["parent_id", 15], ["created_at", "2016-02-21 16:17:50.311981"], ["updated_at", "2016-02-21 16:17:50.311981"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "BBS"], ["val", "notices_path"], ["tag", "/notices"], ["status", 11], ["parent_id", 15], ["created_at", "2016-02-21 16:17:50.314529"], ["updated_at", "2016-02-21 16:17:50.314529"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Logs"], ["val", "logs_path"], ["tag", "/logs"], ["status", 11], ["parent_id", 15], ["created_at", "2016-02-21 16:17:50.317135"], ["updated_at", "2016-02-21 16:17:50.317135"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (7.5ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "代理商"], ["val", ""], ["tag", "fa-user"], ["status", 10], ["parent_id", 1], ["created_at", "2016-02-21 16:17:50.327218"], ["updated_at", "2016-02-21 16:17:50.327218"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "代理商管理"], ["val", "agents_path"], ["tag", "/agents"], ["status", 11], ["parent_id", 22], ["created_at", "2016-02-21 16:17:50.330021"], ["updated_at", "2016-02-21 16:17:50.330021"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "个人设置"], ["val", ""], ["tag", "fa-gear (alias)"], ["status", 10], ["parent_id", 1], ["created_at", "2016-02-21 16:17:50.332507"], ["updated_at", "2016-02-21 16:17:50.332507"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "code_tables" ("name", "val", "tag", "status", "parent_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "资料"], ["val", "home_profile_path"], ["tag", "/profile"], ["status", 11], ["parent_id", 24], ["created_at", "2016-02-21 16:17:50.334859"], ["updated_at", "2016-02-21 16:17:50.334859"]]
+  [1m[35m (0.6ms)[0m  commit transaction
