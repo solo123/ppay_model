@@ -16,6 +16,7 @@ class Agent < ActiveRecord::Base
 
   has_many :clients, through: :salesmen, source: :clients
   has_and_belongs_to_many :contracts
+  has_many :trade_sums, as: :sum_obj
 
   def profit(amount, trade_sum_name)
     r = 0

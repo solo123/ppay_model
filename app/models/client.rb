@@ -7,6 +7,7 @@ class Client < ActiveRecord::Base
   has_many :client_notes
   has_many :trades
   scope :show_order, -> {order('join_date desc')}
+  has_many :trade_sums, as: :sum_obj
 
   # tag
   acts_as_taggable

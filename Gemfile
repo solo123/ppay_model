@@ -14,3 +14,4 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 gem 'devise'
 gem 'acts-as-taggable-on', '~> 3.4'
+gem "rails-erd"
