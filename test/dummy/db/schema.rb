@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160220115227) do
+ActiveRecord::Schema.define(version: 20160315161004) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "addr_obj_id"
@@ -304,10 +304,12 @@ ActiveRecord::Schema.define(version: 20160220115227) do
     t.string   "title"
     t.string   "received_at"
     t.string   "mail_from"
-    t.string   "detail",      default: ""
-    t.integer  "status",      default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "detail",          default: ""
+    t.integer  "status",          default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "origin_filename"
+    t.string   "filename"
   end
 
   create_table "imp_qf_clearings", force: :cascade do |t|
