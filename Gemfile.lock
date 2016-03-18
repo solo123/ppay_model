@@ -131,6 +131,3 @@ DEPENDENCIES
   ppay_model!
   rails-erd
   sqlite3
-
-BUNDLED WITH
-   1.11.2
